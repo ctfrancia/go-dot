@@ -32,7 +32,7 @@ func main() {
 	var df dotFiles
 	// var zshrcPath string
 	// var initVimPath string
-	pathmanager.Hi()
+	pathmanager.StartUp()
 
 	usr, err := user.Current()
 	check(err)
