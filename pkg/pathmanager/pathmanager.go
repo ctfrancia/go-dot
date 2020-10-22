@@ -2,18 +2,13 @@
 package pathmanager
 
 import (
-	// "fmt"
+	"fmt"
+	"github.com/spf13/viper"
 	"log"
 	"os"
-	"os/user"
 	"path/filepath"
+	// "os/user"
 )
-
-// userpaths defines how the paths look for each valid fiel
-type Userpaths struct {
-	zshPath  string
-	nvimPath string
-}
 
 func check(err error) {
 	if err != nil {
@@ -21,49 +16,37 @@ func check(err error) {
 	}
 }
 
-// New returns a new instance of userpaths to access it's methods
-func New() *Userpaths {
-	var up Userpaths
-	return &up
-}
-
-// StartUp is this initial function that will check the user to see if the user is new or the root directory is already there
-// if the user is new then it will start the prompt. If not then it will prepare the files
-func StartUp() *Userpaths {
-	var filepaths Userpaths
-
-	exists := goDotFolderExists()
-	if exists {
-		return &filepaths
-	}
-
-	return &filepaths
-}
-
-func pathValidator(p, filename string) error {
-	return nil
-}
-
-func goDotFolderExists() bool {
-	usr, err := user.Current()
+func CreateGodotDirPath(p string) {
+	err := os.MkdirAll(p, 0777)
 	check(err)
 
-	godotFile := filepath.Join(usr.HomeDir, "/godot")
+	f, err := os.Create(filepath.Join(p, "config.json"))
 	check(err)
+	defer f.Close()
 
-	if _, err := os.Stat(godotFile); os.IsNotExist(err) {
-		err = os.MkdirAll(godotFile, 0777)
-		check(err)
-
-		f, err := os.Create(filepath.Join(godotFile, "config.json"))
-		check(err)
-		defer f.Close()
-	}
-
-	return true
+	fmt.Println("in init true statement")
 }
 
-func (*Userpaths) AddPath(p string) error {
+// ConfigCreate is for creating the congfig file that we will use later on the addition/deletion/update/etc
+func ConfigCreate(configDirPath string, zPath string) { // right now just with zshfile
+	viper.SetConfigName("config")
+	viper.SetConfigType("json")
+	viper.AddConfigPath(configDirPath)
 
-	return nil
+	// set default paths
+	// viper.SetDefault("zshPath", zPath)
+	viper.SetDefault("config", GodotDefault())
+
+	viper.WriteConfig()
+
+	err := viper.ReadInConfig() // Find and read the config file
+	if err != nil {             // Handle errors reading the config file
+		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+	}
+}
+
+func osCheck() string {
+	// check the user's OS and return the value
+
+	return ""
 }

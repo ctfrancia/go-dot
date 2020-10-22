@@ -1,15 +1,18 @@
 package cmd
 
 import (
-	"bufio"
-	"fmt"
+	// "bufio"
+	// "fmt"
+	"github.com/ctfrancia/go-dot/pkg/pathmanager"
 	"github.com/spf13/cobra"
 	"log"
 	"os"
 	"os/user"
 	"path/filepath"
-	"strings"
+	// "strings"
 )
+
+var godotPath string
 
 var initCmd = &cobra.Command{
 	Use:   "init",
@@ -34,12 +37,13 @@ func handleInit(cmd *cobra.Command, args []string) {
 	usr, err := user.Current()
 	check(err)
 
-	godotFile := filepath.Join(usr.HomeDir, "/godot")
-	check(err)
+	godotDir := filepath.Join(usr.HomeDir, "/godot")
+	zshDefaultPathUnix := filepath.Join(usr.HomeDir, "/.zshrc")
+	// godotPath = filepath.Join(usr.HomeDir, "/godot")
 
-	if goDotConfigExists(godotFile) == false {
-		createGoDotPath(godotFile)
-		createConfigFile()
+	if goDotConfigExists(godotDir) == false {
+		pathmanager.CreateGodotDirPath(godotDir)
+		pathmanager.ConfigCreate(godotDir, zshDefaultPathUnix)
 		// prompts.initNewUser()
 		return
 	}
@@ -55,24 +59,4 @@ func goDotConfigExists(path string) bool {
 		return false
 	}
 	return !info.IsDir()
-}
-
-func createGoDotPath(p string) {
-	err := os.MkdirAll(p, 0777)
-	check(err)
-
-	f, err := os.Create(filepath.Join(p, "config.json"))
-	check(err)
-	defer f.Close()
-
-	fmt.Println("in init true statement")
-}
-
-func createConfigFile() {
-	r := bufio.NewReader(os.Stdin)
-	text, _ := r.ReadString('\n')
-	text = strings.TrimSuffix(text, "\n")
-	// File exists, prompt user if they want to overwrite file
-	// if they do, delete file and create again
-	// github.com/spf13/viper for config creation
 }

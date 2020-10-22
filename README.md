@@ -16,3 +16,7 @@ What this application works to do is make it easy, for example some ideas:
 - `go-dot stage` will fetch all your dot files path locations that you have listed when starting
 - `go-dot commit` will push them to your website where it is saved (Github/Bitbucket/Gitlab)
 - `go-dot update` will fetch the information and save it accordingly
+
+
+## Current Todos
+- create separate error handler package to avoing multiple imports (DRY)
