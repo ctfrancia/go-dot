@@ -29,7 +29,7 @@ func check(err error) {
 }
 
 func handleInit(cmd *cobra.Command, args []string) {
-	fmt.Print("Thanks for using Godot, is there anything I can help you with? Type a flag or run 'godot -h' to see a list of available commands")
+	// fmt.Print("Thanks for using Godot, is there anything I can help you with? Type a flag or run 'godot -h' to see a list of available commands")
 
 	usr, err := user.Current()
 	check(err)
@@ -37,8 +37,9 @@ func handleInit(cmd *cobra.Command, args []string) {
 	godotFile := filepath.Join(usr.HomeDir, "/godot")
 	check(err)
 
-	if !goDotConfigExists(godotFile) {
-		// createGoDotPath(godotFile)
+	if goDotConfigExists(godotFile) == false {
+		createGoDotPath(godotFile)
+		createConfigFile()
 		// prompts.initNewUser()
 		return
 	}
