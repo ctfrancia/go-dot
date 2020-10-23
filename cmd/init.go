@@ -35,6 +35,7 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 	godotDir := filepath.Join(usr.HomeDir, ".config", "godot")
 
 	if goDotConfigExists(godotDir) {
+		fmt.Println("file exists")
 		// the file exists
 		// prompt user if they wish to start over again
 		// promptToStartOverAgain()
@@ -48,8 +49,9 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 	// prompts.initNewUser()
 }
 
-func goDotConfigExists(path string) bool {
-	if _, err := os.Stat("/Users/cfrancia/.zshrc"); !os.IsNotExist(err) {
+func goDotConfigExists(p string) bool {
+
+	if _, err := os.Stat(p); !os.IsNotExist(err) {
 		// file exists
 		return true
 	}

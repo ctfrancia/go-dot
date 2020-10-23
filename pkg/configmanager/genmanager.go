@@ -3,43 +3,52 @@ package pathmanager
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
-	"log"
+	// "github.com/spf13/viper"
+	// "log"
 	"os"
 	"path/filepath"
 )
 
-func check(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // CreateGodotDirPath creates the directory and config file where godot is stored
-func CreateGodotDirPath(p string) {
+func CreateGodotDirPath(p string) error {
 	err := os.MkdirAll(p, 0777)
-	check(err)
+	if err != nil {
+		return err
+	}
 
-	f, err := os.Create(filepath.Join(p, "config.json"))
-	check(err)
-	defer f.Close()
-
-	fmt.Println("created config file")
+	fmt.Println("created config directory")
+	return nil
 }
 
 // ConfigCreate is for creating the congfig file that we will use later on the addition/deletion/update/etc
-func ConfigCreate(configDirPath string) { // right now just with zshfile
-	viper.SetConfigName("config")
-	viper.SetConfigType("json")
-	viper.AddConfigPath(configDirPath)
+func ConfigCreate(cPath string) error { // right now just with zshfile
 
-	// set default structure
-	viper.SetDefault("godot", GodotDefault())
-
-	err := viper.WriteConfig()
+	f, err := os.Create(filepath.Join(cPath, "config.json"))
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+
+	defer f.Close()
+
+	fmt.Println("created config.json file")
+	return nil
+
+	/*
+		viper.SetConfigName("config")
+		viper.SetConfigType("json")
+		viper.AddConfigPath(configDirPath)
+
+		// set default structure
+		viper.SetDefault("godot", GodotDefault())
+
+		err := viper.WriteConfig()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		viper.Set("godot.repoURL", "foo")
+		viper.WriteConfig()
+	*/
 
 	/*
 		err = viper.ReadInConfig() // Find and read the config file
@@ -61,6 +70,7 @@ func ConfigCreate(configDirPath string) { // right now just with zshfile
 }
 
 /*
+this will be used for individual default locations of popular files
 func osCheck() string {
 	// check the user's OS and return the value
 
