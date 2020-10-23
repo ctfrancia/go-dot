@@ -20,3 +20,4 @@ What this application works to do is make it easy, for example some ideas:
 
 ## Current Todos
 - create separate error handler package to avoing multiple imports (DRY)
+- refactor the pathmanager pkg to a more appropriate name

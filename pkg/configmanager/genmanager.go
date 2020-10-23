@@ -24,11 +24,11 @@ func CreateGodotDirPath(p string) {
 	check(err)
 	defer f.Close()
 
-	fmt.Println("in init true statement")
+	fmt.Println("created config file")
 }
 
 // ConfigCreate is for creating the congfig file that we will use later on the addition/deletion/update/etc
-func ConfigCreate(configDirPath string, zPath string) { // right now just with zshfile
+func ConfigCreate(configDirPath string) { // right now just with zshfile
 	viper.SetConfigName("config")
 	viper.SetConfigType("json")
 	viper.AddConfigPath(configDirPath)
@@ -41,18 +41,23 @@ func ConfigCreate(configDirPath string, zPath string) { // right now just with z
 		log.Fatal(err)
 	}
 
-	err = viper.ReadInConfig() // Find and read the config file
-	if err != nil {            // Handle errors reading the config file
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
-	}
+	/*
+		err = viper.ReadInConfig() // Find and read the config file
+		if err != nil {            // Handle errors reading the config file
+			panic(fmt.Errorf("Fatal error config file: %s \n", err))
+		}
+	*/
 
 	// TESTING PURPOSES OF JSON EDITING!!!
 	// See()
-	c := New()
-	err = c.AddRepoURL("github.com/ctfrancia/go-dot")
-	if err != nil {
-		log.Fatal(err)
-	}
+	/*
+		c := New()
+		err = c.AddRepoURL("github.com/ctfrancia/.files")
+		if err != nil {
+			fmt.Println("error")
+			log.Fatal(err)
+		}
+	*/
 }
 
 /*

@@ -1,7 +1,8 @@
 package cmd
 
 import (
-	"github.com/ctfrancia/go-dot/pkg/pathmanager"
+	"fmt"
+	cm "github.com/ctfrancia/go-dot/pkg/configmanager"
 	"github.com/spf13/cobra"
 	"log"
 	"os"
@@ -13,7 +14,7 @@ var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Create a new go-dot folder",
 	Long:  `Will create a new go-dot folder as though it is your first time with the application`,
-	Run:   handleInit,
+	Run:   handleInitCmd,
 }
 
 func init() {
@@ -26,30 +27,31 @@ func check(err error) {
 	}
 }
 
-func handleInit(cmd *cobra.Command, args []string) {
+func handleInitCmd(cmd *cobra.Command, args []string) {
 
 	usr, err := user.Current()
 	check(err)
 
 	godotDir := filepath.Join(usr.HomeDir, ".config", "godot")
-	zshDefaultPathUnix := filepath.Join(usr.HomeDir, "/.zshrc")
 
-	if !goDotConfigExists(godotDir) {
-		pathmanager.CreateGodotDirPath(godotDir)
-		pathmanager.ConfigCreate(godotDir, zshDefaultPathUnix)
-		// prompts.initNewUser()
+	if goDotConfigExists(godotDir) {
+		// the file exists
+		// prompt user if they wish to start over again
+		// promptToStartOverAgain()
+		// if userWantsToStartOver() {}
 		return
 	}
-	// the file exists
-	// prompt user if they wish to start over again
-	// promptToStartOverAgain()
-	// if userWantsToStartOver() {}
+
+	fmt.Println("Thank you for using go-dot, one second while we create your config path")
+	cm.CreateGodotDirPath(godotDir)
+	cm.ConfigCreate(godotDir)
+	// prompts.initNewUser()
 }
 
 func goDotConfigExists(path string) bool {
-	info, err := os.Stat(path)
-	if os.IsNotExist(err) {
-		return false
+	if _, err := os.Stat("/Users/cfrancia/.zshrc"); !os.IsNotExist(err) {
+		// file exists
+		return true
 	}
-	return !info.IsDir()
+	return false
 }
