@@ -44,8 +44,11 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Println("Thank you for using go-dot, one second while we create your config path")
-	cm.CreateGodotDirPath(godotDir)
-	cm.ConfigCreate(godotDir)
+	err = cm.CreateGodotDirPath(godotDir)
+	check(err)
+
+	err = cm.ConfigCreate(godotDir)
+	check(err)
 	// prompts.initNewUser()
 }
 
