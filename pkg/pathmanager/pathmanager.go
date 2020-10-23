@@ -7,7 +7,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	// "os/user"
 )
 
 func check(err error) {
@@ -16,6 +15,7 @@ func check(err error) {
 	}
 }
 
+// CreateGodotDirPath creates the directory and config file where godot is stored
 func CreateGodotDirPath(p string) {
 	err := os.MkdirAll(p, 0777)
 	check(err)
@@ -33,20 +33,32 @@ func ConfigCreate(configDirPath string, zPath string) { // right now just with z
 	viper.SetConfigType("json")
 	viper.AddConfigPath(configDirPath)
 
-	// set default paths
-	// viper.SetDefault("zshPath", zPath)
-	viper.SetDefault("config", GodotDefault())
+	// set default structure
+	viper.SetDefault("godot", GodotDefault())
 
-	viper.WriteConfig()
+	err := viper.WriteConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	err := viper.ReadInConfig() // Find and read the config file
-	if err != nil {             // Handle errors reading the config file
+	err = viper.ReadInConfig() // Find and read the config file
+	if err != nil {            // Handle errors reading the config file
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+	}
+
+	// TESTING PURPOSES OF JSON EDITING!!!
+	// See()
+	c := New()
+	err = c.AddRepoURL("github.com/ctfrancia/go-dot")
+	if err != nil {
+		log.Fatal(err)
 	}
 }
 
+/*
 func osCheck() string {
 	// check the user's OS and return the value
 
 	return ""
 }
+*/

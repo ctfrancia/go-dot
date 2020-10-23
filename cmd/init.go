@@ -1,18 +1,13 @@
 package cmd
 
 import (
-	// "bufio"
-	// "fmt"
 	"github.com/ctfrancia/go-dot/pkg/pathmanager"
 	"github.com/spf13/cobra"
 	"log"
 	"os"
 	"os/user"
 	"path/filepath"
-	// "strings"
 )
-
-var godotPath string
 
 var initCmd = &cobra.Command{
 	Use:   "init",
@@ -32,16 +27,14 @@ func check(err error) {
 }
 
 func handleInit(cmd *cobra.Command, args []string) {
-	// fmt.Print("Thanks for using Godot, is there anything I can help you with? Type a flag or run 'godot -h' to see a list of available commands")
 
 	usr, err := user.Current()
 	check(err)
 
-	godotDir := filepath.Join(usr.HomeDir, "/godot")
+	godotDir := filepath.Join(usr.HomeDir, ".config", "godot")
 	zshDefaultPathUnix := filepath.Join(usr.HomeDir, "/.zshrc")
-	// godotPath = filepath.Join(usr.HomeDir, "/godot")
 
-	if goDotConfigExists(godotDir) == false {
+	if !goDotConfigExists(godotDir) {
 		pathmanager.CreateGodotDirPath(godotDir)
 		pathmanager.ConfigCreate(godotDir, zshDefaultPathUnix)
 		// prompts.initNewUser()
