@@ -36,10 +36,7 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 
 	if goDotConfigExists(godotDir) {
 		fmt.Println("file exists")
-		// the file exists
-		// prompt user if they wish to start over again
-		// promptToStartOverAgain()
-		// if userWantsToStartOver() {}
+		fmt.Println("if you want to start over type: 'godot restart' or 'godot modify <file eg: 'zshrc'>' or 'godot -h'")
 		return
 	}
 
@@ -49,11 +46,11 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 
 	err = cm.ConfigCreate(godotDir)
 	check(err)
+
 	// prompts.initNewUser()
 }
 
 func goDotConfigExists(p string) bool {
-
 	if _, err := os.Stat(p); !os.IsNotExist(err) {
 		// file exists
 		return true

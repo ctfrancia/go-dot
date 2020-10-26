@@ -3,35 +3,43 @@ package pathmanager
 import (
 	"encoding/json"
 	"fmt"
+	m "github.com/ctfrancia/go-dot/pkg/models"
 	"io/ioutil"
 	"log"
 )
 
-var gdConfig GdotConfig
-var gdotC GDotC
-
-// New returns the pointer to the struct for methods
-func New() *GdotConfig {
-	return &gdConfig
+// ConfigModel represents our config structure
+type ConfigModel struct {
+	CM *m.GoDotConfig
 }
 
-// AddRepoURL adds the url to where the dotfiles are being remotely stored by GitHub/BitBucket/etc.
-func (c *GdotConfig) AddRepoURL(p string) error {
+var config ConfigModel
+
+// var Config m.GdotConfig
+
+// New returns the pointer to the struct for methods
+func New() *ConfigModel {
+	return &ConfigModel{}
+}
+
+// AddRepoURL adds the url to where the dotfiles are being remotely stored by GitHub/BitBucket/Gitlab/etc.
+func (c *ConfigModel) AddRepoURL(p string) error {
+	// TODO refactor this so we have more SOC
 	content, err := ioutil.ReadFile("/Users/christian.francia/.config/godot/config.json")
 	if err != nil {
-		// log.Fatal(err)
 		return err
 	}
 
-	err = json.Unmarshal(content, &gdotC)
+	err = json.Unmarshal(content, &config)
 	if err != nil {
-		// log.Fatal(err)
 		return err
 	}
 
-	gdotC.Godot.RepoURL = p
+	fmt.Printf("%v", content)
+	// refactor to interact with the manager, returns *GoDotConfig
+	// gdotC.Godot.RepoURL = p
 
-	fmt.Printf("after unmarshal %#v", gdotC)
+	// fmt.Printf("after unmarshal %#v", gdotC)
 
 	return nil
 }
@@ -47,21 +55,30 @@ func See() {
 
 	fmt.Println("before unmarshal", string(content))
 
-	err = json.Unmarshal(content, &gdotC)
-	if err != nil {
-		log.Fatal(err)
-	}
+	/*
+		err = json.Unmarshal(content, &gdotC)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	fmt.Printf("%#v", gdotC)
+		fmt.Printf("%#v", gdotC)
 
-	// fmt.Println("---->", gdotC.Godot.RepoURL)
+		// fmt.Println("---->", gdotC.Godot.RepoURL)
+	*/
 
 }
 
 // AddToConfig takes the key and the value that needs to be added
-func (c *GdotConfig) AddToConfig(k, v string) error {
+func (c *ConfigModel) AddToConfig(k, v string) error {
 	return nil
 }
 
-func save() {
+// Save will update your config
+func Save() error {
+	return nil
+}
+
+// ModifyConfig takes the type eg: "Vim" and will update the
+func ModifyConfig() error {
+	return nil
 }
