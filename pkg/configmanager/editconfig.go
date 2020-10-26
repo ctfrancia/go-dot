@@ -3,29 +3,28 @@ package pathmanager
 import (
 	"encoding/json"
 	"fmt"
+	m "github.com/ctfrancia/go-dot/pkg/models"
 	"io/ioutil"
 	"log"
 )
 
-var gdConfig GdotConfig
-var gdotC GDotC
+var gdConfig m.GdotConfig
+var gdotC m.GDotC
 
 // New returns the pointer to the struct for methods
-func New() *GdotConfig {
+func New() *gdConfig {
 	return &gdConfig
 }
 
-// AddRepoURL adds the url to where the dotfiles are being remotely stored by GitHub/BitBucket/etc.
+// AddRepoURL adds the url to where the dotfiles are being remotely stored by GitHub/BitBucket/Gitlab/etc.
 func (c *GdotConfig) AddRepoURL(p string) error {
 	content, err := ioutil.ReadFile("/Users/christian.francia/.config/godot/config.json")
 	if err != nil {
-		// log.Fatal(err)
 		return err
 	}
 
 	err = json.Unmarshal(content, &gdotC)
 	if err != nil {
-		// log.Fatal(err)
 		return err
 	}
 
@@ -63,5 +62,12 @@ func (c *GdotConfig) AddToConfig(k, v string) error {
 	return nil
 }
 
-func save() {
+// Save will update your config
+func Save() error {
+	return nil
+}
+
+// ModifyConfig takes the type eg: "Vim" and will update the
+func ModifyConfig() error {
+	return nil
 }

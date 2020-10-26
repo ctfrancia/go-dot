@@ -1,10 +1,11 @@
-package pathmanager
+package models
 
 // GodotDefault returns config structure
 func GodotDefault() GdotConfig {
 	return GdotConfig{
-		RepoURL:      "na",
-		RepoUsername: "na",
+		RepoURL:      "",
+		RepoUsername: "",
+		RepoKey:      "",
 		Paths:        []Path{},
 	}
 }
@@ -18,6 +19,7 @@ type GDotC struct {
 type GdotConfig struct {
 	RepoURL      string `json:"repoURL"`
 	RepoUsername string `json:"repoUsername"`
+	RepoKey      string `json:"repoKey"`
 	Paths        []Path `json:"paths"`
 }
 

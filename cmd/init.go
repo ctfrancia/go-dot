@@ -53,7 +53,6 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 }
 
 func goDotConfigExists(p string) bool {
-
 	if _, err := os.Stat(p); !os.IsNotExist(err) {
 		// file exists
 		return true
