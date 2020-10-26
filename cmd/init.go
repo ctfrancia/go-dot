@@ -46,6 +46,7 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 
 	err = cm.ConfigCreate(godotDir)
 	check(err)
+
 	// prompts.initNewUser()
 }
 

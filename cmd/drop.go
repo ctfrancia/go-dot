@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/ctfrancia/go-dot/pkg/prompts"
 	"github.com/spf13/cobra"
 )
 
@@ -16,6 +17,9 @@ func init() {
 }
 
 func handleDropCmd(cmd *cobra.Command, args []string) {
+	dropC := DropConfig()
+	if dropC {
+	}
 	// TODO implement this cmd.
 	// 1. Prompt user if they wish to continue,
 	// 2. yes? remove file/folder
