@@ -1,31 +1,38 @@
 package models
 
-// GodotDefault returns config structure
-func GodotDefault() GdotConfig {
-	return GdotConfig{
-		RepoURL:      "",
-		RepoUsername: "",
-		RepoKey:      "",
-		Paths:        []Path{},
-	}
+// GoDotConfig is what is used inside of the program
+type GoDotConfig struct {
+	RepoURL      string
+	RepoUsername string
+	RepoToken    string
+	Files        []File
 }
 
-// GDotC is the structure that it is being saved within the json file
-type GDotC struct {
+// File represents the individual file looks like that is being tracked
+type File struct {
+	Manager string
+	MPath   string
+	MType   string
+	RunCmd  string
+}
+
+// GoDotConfigJSON is the structure that it is being saved within the json file
+type GoDotConfigJSON struct {
 	Godot GdotConfig `json:"godot"`
 }
 
 // GdotConfig defines the structure of the config
 type GdotConfig struct {
-	RepoURL      string `json:"repoURL"`
-	RepoUsername string `json:"repoUsername"`
-	RepoKey      string `json:"repoKey"`
-	Paths        []Path `json:"paths"`
+	RepoURL      string     `json:"repoURL"`
+	RepoUsername string     `json:"repoUsername"`
+	RepoKey      string     `json:"repoKey"`
+	Files        []FileJSON `json:"files"`
 }
 
-// Path defines how a Path looks
-type Path struct {
+// FileJSON defines how a File looks when interacting with the json
+type FileJSON struct {
 	Manager string `json:"manager"`
 	MPath   string `json:"mpath"`
 	MType   string `json:"mtype"`
+	RunCmd  string `json:"runCmd"`
 }
