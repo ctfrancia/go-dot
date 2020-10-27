@@ -3,7 +3,9 @@ package prompts
 import (
 	"bufio"
 	// "github.com/crfrancia/go-dot/pkg/prompts"
+	"fmt"
 	"os"
+	"strings"
 )
 
 // DropConfig prompts the user if they want to delete the godot folder and config

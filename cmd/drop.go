@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	// cm "github.com/ctfrancia/go-dot/pkg/configmanager"
+	"fmt"
 	"github.com/ctfrancia/go-dot/pkg/prompts"
 	"github.com/spf13/cobra"
 )
@@ -8,8 +10,7 @@ import (
 var dropCmd = &cobra.Command{
 	Use:   "drop",
 	Short: "delete your config file and folder !!HOT!!",
-	Long:  `drop works like you would do for a database, the fild and folder will be deleted and will need to be reinitialized`,
-	Run:   handleDropCmd,
+	Long:  `drop works like you would do for a database, the fild and folder will be deleted and will need to be reinitialized`, Run: handleDropCmd,
 }
 
 func init() {
@@ -17,8 +18,10 @@ func init() {
 }
 
 func handleDropCmd(cmd *cobra.Command, args []string) {
-	dropC := DropConfig()
+	dropC := prompts.DropConfig()
 	if dropC {
+		// _, err := cm.DeleteConfig()
+		fmt.Println("yes was selected")
 	}
 	// TODO implement this cmd.
 	// 1. Prompt user if they wish to continue,

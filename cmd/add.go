@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	/*
-		"fmt"
 		cm "github.com/ctfrancia/go-dot/pkg/configmanager"
 		"log"
 		"os"
@@ -12,7 +12,7 @@ import (
 	*/)
 
 var addCmd = &cobra.Command{
-	Use:   "add",
+	Use:   "add [string to file]",
 	Short: "adds a file to be watched",
 	Long:  `adds a file to the config file, after the flag pass in the path to the file`,
 	Run:   handleAddCmd,
@@ -24,4 +24,5 @@ func init() {
 
 func handleAddCmd(cmd *cobra.Command, args []string) {
 	//TODO handle this command
+	fmt.Println("here", args)
 }

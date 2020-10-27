@@ -2,4 +2,5 @@ package prompts
 
 import ()
 
-func hi() {}
+// InitNewUser provides the prompts for a new user
+func InitNewUser() {}

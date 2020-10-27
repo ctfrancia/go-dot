@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	cm "github.com/ctfrancia/go-dot/pkg/configmanager"
+	// "github.com/ctfrancia/go-dot/pkg/prompts"
 	"github.com/spf13/cobra"
 	"log"
 	"os"
@@ -47,7 +48,7 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 	err = cm.ConfigCreate(godotDir)
 	check(err)
 
-	// prompts.initNewUser()
+	fmt.Println("initialization of the config has completed, please use '-h' to see flags to modify your config file")
 }
 
 func goDotConfigExists(p string) bool {

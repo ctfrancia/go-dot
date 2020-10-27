@@ -3,7 +3,7 @@ package prompts
 import (
 	"bufio"
 	"fmt"
-	"github.com/ctfrancia/go-dot/pkg/pathmanager"
+	"github.com/ctfrancia/go-dot/pkg/configmanager"
 	"os"
 	// "path/filepath"
 	"strings"
