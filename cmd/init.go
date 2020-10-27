@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	cm "github.com/ctfrancia/go-dot/pkg/configmanager"
-	// "github.com/ctfrancia/go-dot/pkg/prompts"
 	"github.com/spf13/cobra"
 	"log"
 	"os"
@@ -22,6 +21,7 @@ func init() {
 	rootCmd.AddCommand(initCmd)
 }
 
+// TODO move this to it's own error handling pkg, because this doesn't provide any further detail
 func check(err error) {
 	if err != nil {
 		log.Fatal(err)

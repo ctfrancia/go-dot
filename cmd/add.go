@@ -12,8 +12,8 @@ import (
 	*/)
 
 var addCmd = &cobra.Command{
-	Use:   "add [string to file]",
-	Short: "adds a file to be watched",
+	Use:   "-add [string name of file to track]",
+	Short: "adds a file to be watched eg: zshrc, init.vim, vimrc",
 	Long:  `adds a file to the config file, after the flag pass in the path to the file`,
 	Run:   handleAddCmd,
 }
