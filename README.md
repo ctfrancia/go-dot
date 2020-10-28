@@ -20,12 +20,7 @@ What this application works to do is make it easy, for example some ideas:
 
 
 ## Current Todos
-- create separate error handler package to avoing multiple imports (DRY)
-- refactor the pathmanager pkg to a more appropriate name
-- impliment `$ godot stage`
-- impliment `$ godot commit`
-- impliment `$ godot update`
-- impliment `$ godot drop`
+look at issues
 
 ## Contribute
 Pull requests are always open, follow the pretty simple `CONTRIBUTING.md` file for instructions
