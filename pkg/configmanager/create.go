@@ -32,41 +32,6 @@ func ConfigCreate(cPath string) error { // right now just with zshfile
 
 	fmt.Println("created config.json file")
 	return nil
-
-	/*
-		viper.SetConfigName("config")
-		viper.SetConfigType("json")
-		viper.AddConfigPath(configDirPath)
-
-		// set default structure
-		viper.SetDefault("godot", GodotDefault())
-
-		err := viper.WriteConfig()
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		viper.Set("godot.repoURL", "foo")
-		viper.WriteConfig()
-	*/
-
-	/*
-		err = viper.ReadInConfig() // Find and read the config file
-		if err != nil {            // Handle errors reading the config file
-			panic(fmt.Errorf("Fatal error config file: %s \n", err))
-		}
-	*/
-
-	// TESTING PURPOSES OF JSON EDITING!!!
-	// See()
-	/*
-		c := New()
-		err = c.AddRepoURL("github.com/ctfrancia/.files")
-		if err != nil {
-			fmt.Println("error")
-			log.Fatal(err)
-		}
-	*/
 }
 
 /*
