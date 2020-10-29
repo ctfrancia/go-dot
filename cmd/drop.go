@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	// cm "github.com/ctfrancia/go-dot/pkg/configmanager"
 	"fmt"
+	cm "github.com/ctfrancia/go-dot/pkg/configmanager"
 	"github.com/ctfrancia/go-dot/pkg/prompts"
 	"github.com/spf13/cobra"
 )
@@ -20,9 +20,18 @@ func init() {
 func handleDropCmd(cmd *cobra.Command, args []string) {
 	dropC := prompts.DropConfig()
 	if dropC {
-		// _, err := cm.DeleteConfig()
-		fmt.Println("yes was selected")
+		err := cm.DeleteConfigFile()
+		// fmt.Println("yes was selected")
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		err = cm.DeleteConfigFolder()
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
+
 	// TODO implement this cmd.
 	// 1. Prompt user if they wish to continue,
 	// 2. yes? remove file/folder

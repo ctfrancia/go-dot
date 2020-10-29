@@ -2,7 +2,6 @@ package prompts
 
 import (
 	"bufio"
-	// "github.com/crfrancia/go-dot/pkg/prompts"
 	"fmt"
 	"os"
 	"strings"
