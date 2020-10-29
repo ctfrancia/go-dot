@@ -20,13 +20,8 @@ func init() {
 func handleDropCmd(cmd *cobra.Command, args []string) {
 	dropC := prompts.DropConfig()
 	if dropC {
-		err := cm.DeleteConfigFile()
+		err := cm.DeleteConfig()
 		// fmt.Println("yes was selected")
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		err = cm.DeleteConfigFolder()
 		if err != nil {
 			fmt.Println(err)
 		}
