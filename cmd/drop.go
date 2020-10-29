@@ -21,16 +21,9 @@ func handleDropCmd(cmd *cobra.Command, args []string) {
 	dropC := prompts.DropConfig()
 	if dropC {
 		err := cm.DeleteConfig()
-		// fmt.Println("yes was selected")
 		if err != nil {
 			fmt.Println(err)
 		}
+		fmt.Println("config deleted successfully")
 	}
-
-	// TODO implement this cmd.
-	// 1. Prompt user if they wish to continue,
-	// 2. yes? remove file/folder
-	// 3. ask if they want to restart
-	// 4. if yes start the process over again on init new user
-	// 5. if no then os.Exit(1) or something more appropriate
 }

@@ -29,7 +29,7 @@ func DeleteConfig() error {
 		return err
 	}
 
-	err = os.Remove(filepath.Join(usr.HomeDir, ".config"))
+	err = os.RemoveAll(filepath.Join(usr.HomeDir, ".config", "godot"))
 	if err != nil {
 		return err
 	}
