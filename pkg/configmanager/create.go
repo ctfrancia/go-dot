@@ -3,8 +3,6 @@ package pathmanager
 
 import (
 	"fmt"
-	// "github.com/spf13/viper"
-	// "log"
 	"os"
 	"path/filepath"
 )
@@ -16,7 +14,7 @@ func CreateGodotDirPath(p string) error {
 		return err
 	}
 
-	fmt.Println("created config directory")
+	fmt.Println("created config directory at: ", p)
 	return nil
 }
 
@@ -33,12 +31,3 @@ func ConfigCreate(cPath string) error { // right now just with zshfile
 	fmt.Println("created config.json file")
 	return nil
 }
-
-/*
-this will be used for individual default locations of popular files
-func osCheck() string {
-	// check the user's OS and return the value
-
-	return ""
-}
-*/
