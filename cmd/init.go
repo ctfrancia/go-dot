@@ -42,13 +42,7 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Println("Thank you for using go-dot, one second while we create your config path")
-	err = cm.CreateGodotDirPath(godotDir)
-	check(err)
-
-	err = cm.ConfigCreate(godotDir)
-	check(err)
-
-	err = cm.CreateBasicConfig()
+	_, err = cm.CreateGodot(godotDir)
 	check(err)
 
 	fmt.Println("initialization of the config has completed, please use '-h' to see flags to modify your config file")
