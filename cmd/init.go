@@ -48,6 +48,9 @@ func handleInitCmd(cmd *cobra.Command, args []string) {
 	err = cm.ConfigCreate(godotDir)
 	check(err)
 
+	err = cm.CreateBasicConfig()
+	check(err)
+
 	fmt.Println("initialization of the config has completed, please use '-h' to see flags to modify your config file")
 }
 

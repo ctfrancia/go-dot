@@ -3,9 +3,27 @@ package pathmanager
 
 import (
 	"fmt"
+	"github.com/ctfrancia/go-dot/pkg/models"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 	"os"
+	"os/user"
 	"path/filepath"
 )
+
+var basic = `
+# basic structure
+
+repoURL: none
+repoToken: none 
+files:
+	- type: neovim # manager type 
+	  path: ~/.config/nvim/init.vim # path to the file # location of file
+	  runCmd: nil # (optional) any run commands associated
+	- type: zsh
+	  path: ~/.zshrc
+	  runCmd: nil
+`
 
 // CreateGodotDirPath creates the directory and config file where godot is stored
 func CreateGodotDirPath(p string) error {
@@ -29,5 +47,21 @@ func ConfigCreate(cPath string) error { // right now just with zshfile
 	defer f.Close()
 
 	fmt.Println("created config.yaml file")
+	return nil
+}
+
+// CreateBasicConfig creates a boilerplate for how the config file looks
+func CreateBasicConfig() error {
+	// m := models.GoDotConfig{}
+	usr, err := user.Current()
+	if err != nil {
+		return err
+	}
+	path := filepath.Join(usr.HomeDir, ".config", "config.yaml")
+	err = ioutil.WriteFile(path, []byte(basic), 0777)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
