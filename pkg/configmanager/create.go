@@ -21,13 +21,13 @@ func CreateGodotDirPath(p string) error {
 // ConfigCreate is for creating the congfig file that we will use later on the addition/deletion/update/etc
 func ConfigCreate(cPath string) error { // right now just with zshfile
 
-	f, err := os.Create(filepath.Join(cPath, "config.json"))
+	f, err := os.Create(filepath.Join(cPath, "config.yaml"))
 	if err != nil {
 		return err
 	}
 
 	defer f.Close()
 
-	fmt.Println("created config.json file")
+	fmt.Println("created config.yaml file")
 	return nil
 }
