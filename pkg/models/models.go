@@ -2,10 +2,9 @@ package models
 
 // GoDotConfig is what is used inside of the program
 type GoDotConfig struct {
-	RepoURL      string
-	RepoUsername string
-	RepoToken    string
-	Files        []File
+	RepoURL   string
+	RepoToken string
+	Files     []File
 }
 
 // File represents the individual file looks like that is being tracked
@@ -16,23 +15,22 @@ type File struct {
 	RunCmd  string
 }
 
-// GoDotConfigJSON is the structure that it is being saved within the json file
+// GoDotConfigJSON is the structure that it is being saved within the yaml file
 type GoDotConfigJSON struct {
-	Godot GdotConfig `json:"godot"`
+	Godot GdotConfig `yaml:"godot"`
 }
 
 // GdotConfig defines the structure of the config
 type GdotConfig struct {
-	RepoURL      string     `json:"repoURL"`
-	RepoUsername string     `json:"repoUsername"`
-	RepoKey      string     `json:"repoKey"`
-	Files        []FileJSON `json:"files"`
+	RepoURL string     `yaml:"repoURL"`
+	RepoKey string     `yaml:"repoKey"`
+	Files   []FileJSON `yaml:"files"`
 }
 
-// FileJSON defines how a File looks when interacting with the json
+// FileJSON defines how a File looks when interacting with the yaml
 type FileJSON struct {
-	Manager string `json:"manager"`
-	MPath   string `json:"mpath"`
-	MType   string `json:"mtype"`
-	RunCmd  string `json:"runCmd"`
+	Manager string `yaml:"manager"`
+	MPath   string `yaml:"mpath"`
+	MType   string `yaml:"mtype"`
+	RunCmd  string `yaml:"runCmd"`
 }
